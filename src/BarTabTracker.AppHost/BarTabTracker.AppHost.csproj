@@ -1,0 +1,20 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.4.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>4dcad903-4403-4bb8-b79b-b4ae2db316b6</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarTabTracker.Server\BarTabTracker.Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Azure.AppContainers" Version="13.4.0" />
+    <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.4.0" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="13.4.0" />
+  </ItemGroup>
+</Project>

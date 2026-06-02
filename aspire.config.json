@@ -1,0 +1,6 @@
+{
+  "appHost": {
+    "path": "src/BarTabTracker.AppHost/BarTabTracker.AppHost.csproj"
+  },
+  "channel": "stable"
+}

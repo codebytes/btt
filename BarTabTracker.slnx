@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="src/BarTabTracker.AppHost/BarTabTracker.AppHost.csproj" />
+  <Project Path="src/BarTabTracker.Server/BarTabTracker.Server.csproj" />
+  <Project Path="src/frontend/frontend.esproj">
+    <Build />
+  </Project>
+</Solution>
