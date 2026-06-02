@@ -497,3 +497,6 @@ src/frontend/obj*
 test/e2e/.artifacts/
 test/e2e/playwright-report/
 playwright-report/
+
+# Aspire publish/deploy output
+src/BarTabTracker.AppHost/aspire-output/

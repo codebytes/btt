@@ -24,7 +24,7 @@ test.describe('BarTabTracker core flows', () => {
     await expect(page.getByRole('heading', { name: tabName })).toBeVisible();
     await expect(page.getByText('No bar tagged')).toBeVisible();
 
-    await page.getByRole('link', { name: '🍻 Tabs' }).click();
+    await page.getByRole('link', { name: 'Tabs' }).click();
     await expect(page.getByRole('link', { name: new RegExp(tabName) })).toBeVisible();
     await page.getByRole('link', { name: new RegExp(tabName) }).click();
 
@@ -58,7 +58,7 @@ test.describe('BarTabTracker core flows', () => {
     await page.getByRole('button', { name: 'Close tab' }).click();
     await expect(page.locator('.status-badge').filter({ hasText: 'closed' })).toBeVisible();
 
-    await page.getByRole('link', { name: '🧾 History' }).click();
+    await page.getByRole('link', { name: 'History' }).click();
     await expect(page.getByRole('heading', { name: 'History' })).toBeVisible();
     await expect(page.getByRole('link', { name: new RegExp(tabName) })).toBeVisible();
   });

@@ -1,19 +1,54 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { listTabs, type Tab } from '../api';
+import { useAuth } from '../auth/useAuth';
 import { formatDate } from '../utils/format';
 
 export function HomePage() {
+  const { user, loading: authLoading } = useAuth();
   const [tabs, setTabs] = useState<Tab[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    // Wait for auth to resolve before fetching so the request isn't sent
+    // before the dev-login fallback (DEV) or Entra cookie (prod) is ready.
+    // The effect re-runs when auth state changes, so a fresh session refetches
+    // once authenticated instead of staying on a pre-auth 401.
+    if (authLoading) {
+      return;
+    }
+
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
+    let active = true;
+    setLoading(true);
+    setError(null);
+
     listTabs()
-      .then(setTabs)
-      .catch(() => setError('Could not load open tabs yet.'))
-      .finally(() => setLoading(false));
-  }, []);
+      .then((result) => {
+        if (active) {
+          setTabs(result);
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setError('Could not load open tabs yet.');
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [authLoading, user]);
 
   return (
     <section className="stack page-card hero-card">

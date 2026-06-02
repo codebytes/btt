@@ -71,3 +71,8 @@ jobs:
           Azure__SubscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           Azure__Location: ${{ vars.AZURE_LOCATION || 'eastus' }}
           Azure__ResourceGroup: ${{ vars.AZURE_RESOURCE_GROUP }}
+          # Entra ID parameters supplied to the Aspire AppHost (dashes -> underscores).
+          # entra-client-secret lands as a durable Container App secret on deploy.
+          Parameters__entra_tenant_id: ${{ secrets.ENTRA_TENANT_ID }}
+          Parameters__entra_client_id: ${{ secrets.ENTRA_CLIENT_ID }}
+          Parameters__entra_client_secret: ${{ secrets.ENTRA_CLIENT_SECRET }}
