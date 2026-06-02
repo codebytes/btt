@@ -2,6 +2,7 @@ import type {
   AddTabItemInput,
   CreateTabInput,
   HistoryTab,
+  LeaderboardEntry,
   ReverseGeocodeResult,
   Tab,
   TabDetail,
@@ -131,6 +132,10 @@ export function joinTab(token: string): Promise<TabDetail> {
 
 export function getHistory(): Promise<HistoryTab[]> {
   return apiClient<HistoryTab[]>('/history');
+}
+
+export function getLeaderboard(limit = 10): Promise<LeaderboardEntry[]> {
+  return apiClient<LeaderboardEntry[]>(`/leaderboard?limit=${encodeURIComponent(limit)}`);
 }
 
 export function reverseGeocode(lat: number, lng: number): Promise<ReverseGeocodeResult> {

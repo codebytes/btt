@@ -53,3 +53,5 @@ public sealed record TabDetailResponse(
     SplitResponse Split);
 
 public sealed record ReverseGeocodeResponse(string? BarName, string? Country, string Currency, bool IsFallback);
+
+public sealed record LeaderboardResponse(string UserId, string DisplayName, string? AvatarUrl, int TabCount);

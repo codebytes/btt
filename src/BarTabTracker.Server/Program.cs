@@ -5,6 +5,7 @@ using System.Threading.RateLimiting;
 using BarTabTracker.Server.Api;
 using BarTabTracker.Server.Auth;
 using BarTabTracker.Server.Location;
+using BarTabTracker.Server.Leaderboard;
 using BarTabTracker.Server.Splitting;
 using BarTabTracker.Server.Storage;
 
@@ -29,6 +30,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddProblemDetails();
 builder.Services.AddBarTabStorage();
 builder.Services.AddScoped<SplitCalculator>();
+builder.Services.AddScoped<LeaderboardService>();
 builder.Services.AddHttpClient<IReverseGeocoder, NominatimReverseGeocoder>(client =>
 {
     client.BaseAddress = new Uri("https://nominatim.openstreetmap.org/");

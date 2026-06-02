@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using BarTabTracker.Server.Auth;
 using BarTabTracker.Server.Domain;
+using BarTabTracker.Server.Leaderboard;
 using BarTabTracker.Server.Location;
 using BarTabTracker.Server.Splitting;
 using BarTabTracker.Server.Storage;
@@ -206,6 +207,18 @@ public static class ApiEndpointExtensions
                 .OrderByDescending(tab => tab.ClosedAt));
         }).RequireAuthorization();
 
+        api.MapGet("/leaderboard", async (int? limit, HttpContext httpContext, ICurrentUserService currentUserService, LeaderboardService leaderboard) =>
+        {
+            var user = await currentUserService.GetCurrentUser(httpContext);
+            if (user is null)
+            {
+                return Results.Unauthorized();
+            }
+
+            var entries = await leaderboard.GetLeaderboard(limit);
+            return Results.Ok(entries.Select(ToLeaderboardResponse));
+        }).RequireAuthorization();
+
         api.MapGet("/geocode/reverse", async (double lat, double lng, IReverseGeocoder geocoder, CancellationToken cancellationToken) =>
         {
             if (lat is < -90 or > 90 || lng is < -180 or > 180)
@@ -357,6 +370,9 @@ public static class ApiEndpointExtensions
         || tab.MemberIds.Contains(userId, StringComparer.Ordinal);
 
     private static UserResponse ToUserResponse(User user) => new(user.Id, user.DisplayName, user.AvatarUrl, user.CreatedAt);
+
+    private static LeaderboardResponse ToLeaderboardResponse(LeaderboardEntry entry) =>
+        new(entry.UserId, entry.DisplayName, entry.AvatarUrl, entry.TabCount);
 
     private static TabSummaryResponse ToTabSummary(Tab tab) => new(
         tab.Id,

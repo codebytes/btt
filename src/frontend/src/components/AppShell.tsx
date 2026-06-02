@@ -5,6 +5,7 @@ const navItems = [
   { to: '/', label: 'Tabs', icon: '🍻' },
   { to: '/tabs/new', label: 'New', icon: '➕' },
   { to: '/history', label: 'History', icon: '🧾' },
+  { to: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
 ] as const;
 
 export function AppShell() {

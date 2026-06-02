@@ -23,4 +23,8 @@ public interface ITabRepository
     Task<IReadOnlyList<Tab>> GetTabsForUser(string userId);
 
     Task AddMember(string tabId, string userId);
+
+    Task<IReadOnlyList<OwnerTabCount>> GetOwnerTabCounts();
 }
+
+public sealed record OwnerTabCount(string OwnerId, int TabCount);

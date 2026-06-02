@@ -347,6 +347,74 @@
   align-items: flex-start;
 }
 
+.leaderboard-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.leaderboard-row {
+  gap: var(--space-2);
+}
+
+.leaderboard-rank {
+  display: grid;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  font-weight: 800;
+  background: rgb(39 86 77 / 10%);
+  border-radius: 999px;
+}
+
+.leaderboard-avatar {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  overflow: hidden;
+  object-fit: cover;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: 800;
+  background: var(--color-surface-strong);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+}
+
+.leaderboard-avatar--fallback {
+  background: rgb(230 106 44 / 14%);
+}
+
+.leaderboard-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.leaderboard-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-count {
+  display: grid;
+  flex: 0 0 auto;
+  justify-items: end;
+  gap: 0.1rem;
+  text-align: right;
+}
+
+.leaderboard-count small {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .segmented-control {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

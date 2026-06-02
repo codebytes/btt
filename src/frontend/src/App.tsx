@@ -5,6 +5,7 @@ import { AppShell } from './components/AppShell';
 import { HistoryPage } from './pages/HistoryPage';
 import { HomePage } from './pages/HomePage';
 import { JoinTabPage } from './pages/JoinTabPage';
+import { LeaderboardPage } from './pages/LeaderboardPage';
 import { LoginPage } from './pages/LoginPage';
 import { NewTabPage } from './pages/NewTabPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -21,6 +22,7 @@ function App() {
           <Route path="tabs/:id" element={<TabDetailPage />} />
           <Route path="join/:token" element={<JoinTabPage />} />
           <Route path="history" element={<HistoryPage />} />
+          <Route path="leaderboard" element={<LeaderboardPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

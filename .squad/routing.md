@@ -9,6 +9,7 @@ How to decide who handles what.
 | Frontend / UI | Linus | React components, TypeScript, Vite, styling, client state, API integration |
 | Backend / API | Basher | C# / ASP.NET Core endpoints, services, data access, Aspire server wiring |
 | Architecture / Aspire orchestration | Rusty | AppHost service graph, cross-cutting design, how pieces fit together |
+| Infra / CI/CD / Cloud / Identity | Reuben | GitHub Actions workflows, Aspire deploy to Azure, Azure infra/IaC, Entra ID app registration & redirect URIs, secrets/config |
 | Code review | Rusty | Review PRs, check quality, suggest improvements |
 | Testing | Livingston | Write tests, find edge cases, verify fixes |
 | Scope & priorities | Rusty | What to build next, trade-offs, decisions |

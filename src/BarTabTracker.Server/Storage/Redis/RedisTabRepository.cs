@@ -41,7 +41,8 @@ public sealed class RedisTabRepository(IConnectionMultiplexer connection) : ITab
             batch.KeyDeleteAsync(TabKey(id)),
             batch.KeyDeleteAsync(MembersKey(id)),
             batch.KeyDeleteAsync(ItemsKey(id)),
-            batch.KeyDeleteAsync(InviteKey(tab.InviteToken))
+            batch.KeyDeleteAsync(InviteKey(tab.InviteToken)),
+            batch.SetRemoveAsync(AllTabsKey(), id)
         };
 
         foreach (var userId in IndexedMemberIds(tab))
@@ -117,6 +118,26 @@ public sealed class RedisTabRepository(IConnectionMultiplexer connection) : ITab
             .ToArray();
     }
 
+    public async Task<IReadOnlyList<OwnerTabCount>> GetOwnerTabCounts()
+    {
+        var tabIds = await database.SetMembersAsync(AllTabsKey());
+        if (tabIds.Length == 0)
+        {
+            return [];
+        }
+
+        var keys = tabIds.Select(tabId => (RedisKey)TabKey(tabId!)).ToArray();
+        var values = await database.StringGetAsync(keys);
+
+        return values
+            .Where(value => value.HasValue)
+            .Select(value => JsonSerializer.Deserialize<Tab>((string)value!, RedisJson.Options))
+            .OfType<Tab>()
+            .GroupBy(tab => tab.OwnerId, StringComparer.Ordinal)
+            .Select(group => new OwnerTabCount(group.Key, group.Count()))
+            .ToArray();
+    }
+
     public async Task AddMember(string tabId, string userId)
     {
         var tab = await GetById(tabId) ?? throw new InvalidOperationException($"Tab '{tabId}' was not found.");
@@ -139,7 +160,8 @@ public sealed class RedisTabRepository(IConnectionMultiplexer connection) : ITab
         var tasks = new List<Task>
         {
             batch.StringSetAsync(TabKey(tab.Id), json),
-            batch.StringSetAsync(InviteKey(tab.InviteToken), tab.Id)
+            batch.StringSetAsync(InviteKey(tab.InviteToken), tab.Id),
+            batch.SetAddAsync(AllTabsKey(), tab.Id)
         };
 
         if (existing is not null && !string.Equals(existing.InviteToken, tab.InviteToken, StringComparison.Ordinal))
@@ -182,4 +204,6 @@ public sealed class RedisTabRepository(IConnectionMultiplexer connection) : ITab
     private static string ItemKey(string tabId, string itemId) => $"tab:{tabId}:item:{itemId}";
 
     private static string UserTabsKey(string userId) => $"user:{userId}:tabs";
+
+    private static string AllTabsKey() => "tabs:all";
 }

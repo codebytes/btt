@@ -70,3 +70,10 @@ export type HistoryTab = Tab & {
   total?: number;
   yourShare?: number;
 };
+
+export type LeaderboardEntry = {
+  userId: string;
+  displayName: string;
+  avatarUrl: string | null;
+  tabCount: number;
+};

@@ -16,6 +16,7 @@
 | Linus | Frontend Dev | .squad/agents/linus/charter.md | ⚛️ active |
 | Basher | Backend Dev | .squad/agents/basher/charter.md | 🔧 active |
 | Livingston | Tester | .squad/agents/livingston/charter.md | 🧪 active |
+| Reuben | Infra Engineer | .squad/agents/reuben/charter.md | ☁️ active |
 | Scribe | Session Logger | .squad/agents/scribe/charter.md | 📋 silent |
 | Ralph | Work Monitor | .squad/agents/ralph/charter.md | 🔄 monitor |
 | Rai | RAI Reviewer | .squad/agents/Rai/charter.md | 🛡️ background |
