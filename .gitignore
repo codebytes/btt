@@ -480,3 +480,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Stray MSBuild artifact with backslash path segments (breaks clone/checkout on Windows)
+src/frontend/obj*
