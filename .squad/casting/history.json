@@ -1,0 +1,21 @@
+{
+  "universe_usage_history": [
+    {
+      "universe": "Ocean's Eleven",
+      "assignment_id": "btt-initial-cast-20260602",
+      "used_at": "2026-06-02T16:48:33+02:00"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "btt-initial-cast-20260602": {
+      "universe": "Ocean's Eleven",
+      "agents": {
+        "lead": "Rusty",
+        "frontend": "Linus",
+        "backend": "Basher",
+        "tester": "Livingston"
+      },
+      "created_at": "2026-06-02T16:48:33+02:00"
+    }
+  }
+}
