@@ -2,8 +2,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
-builder.AddRedisClientBuilder("cache")
-    .WithOutputCache();
+
+var cacheClient = builder.AddRedisClientBuilder("cache");
+cacheClient.WithOutputCache();
+
+// In Azure the cache is provisioned as managed Redis with Entra ID auth (no password).
+// Locally it runs as a container using a password-based connection string.
+if (!builder.Environment.IsDevelopment())
+{
+    cacheClient.WithAzureAuthentication();
+}
 
 // Add services to the container.
 builder.Services.AddProblemDetails();

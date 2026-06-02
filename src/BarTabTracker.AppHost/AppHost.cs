@@ -2,7 +2,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 builder.AddAzureContainerAppEnvironment("aca");
 
-var cache = builder.AddRedis("cache");
+var cache = builder.AddAzureManagedRedis("cache")
+    .RunAsContainer();
 
 var server = builder.AddProject<Projects.BarTabTracker_Server>("server")
     .WithReference(cache)

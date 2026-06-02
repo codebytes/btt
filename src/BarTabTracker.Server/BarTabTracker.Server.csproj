@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Microsoft.Azure.StackExchangeRedis" Version="13.4.0" />
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="13.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.8" />
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.6.0" />
